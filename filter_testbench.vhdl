@@ -4,7 +4,7 @@ USE ieee.numeric_std.ALL;
 USE ieee.numeric_std_unsigned.ALL;
 
 LIBRARY work;
-USE work.filter_type.ALL;
+USE work.filter_types.ALL;
 
 ENTITY filter_testbench IS
 END ENTITY filter_testbench;
@@ -31,7 +31,6 @@ ARCHITECTURE RTL OF filter_testbench IS
 
 	TYPE test_vector_array IS ARRAY (NATURAL RANGE 0 TO 16) OF test_vector;
 	CONSTANT test_vectors : test_vector_array := (
-		-- a, b, sum , carry   -- positional method is used below
 		(
 		input => (x"ff", x"ff", x"00", x"00", x"00", x"00"),
 		output => d"213"
