@@ -1,3 +1,5 @@
 *.o
 *.ghw
 *.cf
+filter
+filter_testbench
