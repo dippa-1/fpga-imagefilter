@@ -28,15 +28,134 @@ ARCHITECTURE RTL OF linebuffer_testbench IS
 		input_line : line_t;
 		line_ready : std_logic;
 		image_part : image_part_t;
+		filter_clock : STD_LOGIC;
 		need_line : std_logic;
 	END RECORD;
 
 	TYPE test_vector_array IS ARRAY (NATURAL RANGE 0 TO 0) OF test_vector;
 	CONSTANT test_vectors : test_vector_array := (
 		(
-			input_line => ()
-		)
+			-- request line high
+			input_line => others <= (others <= '0'),
+			line_ready => '0',
+			image_part => others <= (others <= '0'),
+			filter_clock => '0',
+			need_line => '1'
+		),
+		(
+			-- request line low
+			input_line => others <= (others <= '0'),
+			line_ready => '0',
+			image_part => others <= (others <= '0'),
+			filter_clock => '0',
+			need_line => '0'
+		),
+		(
+			-- after some time: line is ready
+			input_line => (),
+			line_ready => '1',
+			image_part => others <= (others <= '0'),
+			filter_clock => '0',
+			need_line => '0'
+		),
+		(
+			-- line ready low, need 2nd line
+			input_line => (),
+			line_ready => '0',
+			image_part => others <= (others <= '0'),
+			filter_clock => '0',
+			need_line => '1'
+		),
+		(
+			-- need line back to 0
+			input_line => (),
+			line_ready => '0',
+			image_part => others <= (others <= '0'),
+			filter_clock => '0',
+			need_line => '0'
+		),
+		(
+			-- after some time: 2nd line ready
+			input_line => (),
+			line_ready => '1',
+			image_part => others <= (others <= '0'),
+			filter_clock => '0',
+			need_line => '0'
+		),
+		(
+			-- line ready low, need 3rd line
+			input_line => (),
+			line_ready => '0',
+			image_part => others <= (others <= '0'),
+			filter_clock => '0',
+			need_line => '1'
+		),
+		(
+			-- need line low
+			input_line => (),
+			line_ready => '0',
+			image_part => others <= (others <= '0'),
+			filter_clock => '0',
+			need_line => '0'
+		),
+		(
+			-- after some time: 3rd line ready
+			input_line => (),
+			line_ready => '1',
+			image_part => others <= (others <= '0'),
+			filter_clock => '0',
+			need_line => '0'
+		),
+		(
+			-- need 4th line & send first image part
+			input_line => (),
+			line_ready => '0',
+			image_part => (),
+			filter_clock => '1',
+			need_line => '1'
+		),
+		(
+			-- 1st img part clk low
+			input_line => (),
+			line_ready => '0',
+			image_part => (),
+			filter_clock => '0',
+			need_line => '0'
+		),
+		(
+			-- 2 img part
+			input_line => (),
+			line_ready => '0',
+			image_part => (),
+			filter_clock => '1',
+			need_line => '0'
+		),
+		(
+			-- 2 img part clk low
+			input_line => (),
+			line_ready => '0',
+			image_part => (),
+			filter_clock => '0',
+			need_line => '0'
+		),
+		(
+			-- 3 img part
+			input_line => (),
+			line_ready => '0',
+			image_part => (),
+			filter_clock => '1',
+			need_line => '0'
+		),
+		(
+			-- 3 img part clk low
+			input_line => (),
+			line_ready => '0',
+			image_part => (),
+			filter_clock => '0',
+			need_line => '0'
+		),
 	);
+
 BEGIN
 	DUT : linebuffer
 	PORT MAP(
