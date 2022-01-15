@@ -1,6 +1,6 @@
 GHDL=ghdl
 FLAGS="--std=08"
-FILTER_FILE="filter"
+FILTER_FILE="linebuffer"
 
 all:
 	@$(GHDL) -a $(FLAGS) $(FILTER_FILE).vhdl $(FILTER_FILE)_testbench.vhdl
