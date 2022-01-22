@@ -177,18 +177,19 @@ BEGIN
 	test : PROCESS
 	BEGIN
 		FOR i IN test_vectors'RANGE LOOP
-			-- t_input_line <= test_vectors(i).input_line;
-			-- t_line_ready <= test_vectors(i).line_ready;
+			t_input_line <= test_vectors(i).input_line;
+			t_line_ready <= test_vectors(i).line_ready;
 
-			-- WAIT FOR 50 ns;
-			-- t_ext_clk <= '1';
+			WAIT FOR 50 ns;
+			t_ext_clk <= '1';
 
-			-- WAIT FOR 50 ns;
-			-- t_ext_clk <= '0';
+			WAIT FOR 50 ns;
+			t_ext_clk <= '0';
 
-			-- ASSERT(t_image_part = test_vectors(i).image_part);
-			-- REPORT "Wrong result! " & to_string(t_output) & " should be " & to_string(test_vectors(i).output)
-			-- 	& ", Diff: " & to_string(t_output - test_vectors(i).output) SEVERITY warning;
+			-- for p in t_image_part'RANGE LOOP
+			-- 	ASSERT(t_image_part(p) = test_vectors(i).image_part(p));
+			-- 	REPORT "image_part pixel is not as expected! " & to_string(t_image_part(p)) & " should be " & to_string(test_vectors(i).image_part(p)) SEVERITY error;
+			-- end loop;
 
 		END LOOP;
 		WAIT;
