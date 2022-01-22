@@ -23,12 +23,12 @@ ARCHITECTURE RTL OF linebuffer_testbench IS
 	END COMPONENT Linebuffer;
 
 	-- inputs
-	SIGNAL t_ext_clk : STD_LOGIC;
+	SIGNAL t_ext_clk : STD_LOGIC := '0';
 	SIGNAL t_input_line : line_t;
 	SIGNAL t_line_ready : STD_LOGIC;
 	-- outputs
 	SIGNAL t_image_part : image_part_t;
-	SIGNAL t_filter_clock : STD_LOGIC := '0';
+	SIGNAL t_filter_clock : STD_LOGIC;
 	SIGNAL t_need_line : STD_LOGIC;
 	-- test vector
 	TYPE test_vector IS RECORD
