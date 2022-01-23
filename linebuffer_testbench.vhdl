@@ -180,10 +180,10 @@ BEGIN
 			t_input_line <= test_vectors(i).input_line;
 			t_line_ready <= test_vectors(i).line_ready;
 
-			WAIT FOR 50 ns;
+			WAIT FOR 5 ns;
 			t_ext_clk <= '1';
 
-			WAIT FOR 50 ns;
+			WAIT FOR 5 ns;
 			t_ext_clk <= '0';
 
 			-- for p in t_image_part'RANGE LOOP
